@@ -50,8 +50,8 @@ class Circle
 
     changeRadius(mouseX, mouseY)
     {
-        if (mouseX - this._circleX < 50 && // If this mouse is closer than 50 pixels from the right
-            mouseX - this._circleX > -50) { // and if the mouse is closer than 50 px from the left
+        if (mouseX - this._circleX < 400 && // If this mouse is closer than 50 pixels from the right
+            mouseX - this._circleX > -400) { // and if the mouse is closer than 50 px from the left
             if (mouseY - this._circleY < 50 && mouseY - this._circleY > -50)
             {
                 if (this._circleRadius < this._maxRadius)
