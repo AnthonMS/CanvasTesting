@@ -39,7 +39,7 @@ class Ball
         {
             if (this.y - mouseY < 100 && this.y - mouseY > -100)
             {
-                console.log(this.name);
+                //console.log(this.name);
                 this.dx = this.randomIntFromRange(-10, 10);
                 this.dy = this.randomIntFromRange(-20, -10);
             }

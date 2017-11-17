@@ -24,7 +24,7 @@ window.onload = function () {
 };
 
 addEventListener('click', function (event) {
-    console.log(event);
+    //console.log(event);
     for (var i = 0; i < ballArray.length; i++)
     {
         ballArray[i].bounceBall(event.clientX, event.clientY);
