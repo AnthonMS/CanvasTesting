@@ -1,7 +1,7 @@
 var canvas, ctx, innerWidth, innerHeight;
 var keys = [];
 var platformArray = [];
-var ballArray = [];
+var bulletArray = [];
 var colorArray = ['blue', 'purple', 'red', 'yellow', 'orange', 'green'];
 var player;
 
@@ -13,24 +13,12 @@ window.onload = function () {
     canvas.width = innerWidth;
     canvas.height = innerHeight;
 
-    platformArray.push({
-        x: 0,
-        y: 0,
-        width: 10,
-        height: innerHeight
-    });
-    platformArray.push({
-        x: 0,
-        y: innerHeight - 10,
-        width: innerWidth,
-        height: 10
-    });
-    platformArray.push({
-        x: innerWidth - 10,
-        y: 0,
-        width: 10,
-        height: innerHeight
-    });
+    //console.log("Testing Updates!!!!");
+
+    pushPlatform(0, 0, 10, innerHeight);
+    pushPlatform(0, innerHeight - 10, innerWidth, 10);
+    pushPlatform(innerWidth - 10, 0, 10, innerHeight);
+    pushPlatform(0, 0, innerWidth, 10);
 
     player = new Player("Player1", 30, 60, innerWidth, innerHeight, 'red');
 
@@ -38,14 +26,26 @@ window.onload = function () {
 
 };
 
+function pushPlatform(startX, startY, platWidth, platHeight) {
+    platformArray.push({
+        x: startX,
+        y: startY,
+        width: platWidth,
+        height: platHeight
+    });
+}
+
 addEventListener('click', function (event) {
-    //console.log(event);
+    //console.log(bulletArray);
+    player.playerShootBullet(event.clientX, event.clientY);
 });
 
 
 function animate() {
     setInterval(function () {
         ctx.clearRect(0, 0, innerWidth, innerHeight);
+        ctx.fillStyle = 'skyblue';
+        ctx.fillRect(0, 0, innerWidth, innerHeight);
 
         for (var i = 0; i < platformArray.length; i++)
         {
@@ -54,6 +54,7 @@ function animate() {
         }
 
         updatePlayer();
+        updateBullets();
 
     }, 1000/50); // 50 frames per second
 }
@@ -78,6 +79,23 @@ function updatePlayer() {
     ctx.fillRect(player.x, player.y, player.width, player.height);
     ctx.strokeStyle = 'black';
     ctx.strokeRect(player.x, player.y, player.width, player.height);
+}
+
+function updateBullets() {
+    for (var i = 0; i < bulletArray.length; i++)
+    {
+        if (bulletArray[i].toRemove) {
+            bulletArray.splice(i, 1);
+        } else {
+            ctx.beginPath();
+            ctx.arc(bulletArray[i].x, bulletArray[i].y, bulletArray[i].radius, 0, Math.PI * 2, false);
+            ctx.strokeStyle = 'black';
+            ctx.stroke();
+            ctx.fillStyle = bulletArray[i].color;
+            ctx.fill();
+            bulletArray[i].moveBullet();
+        }
+    }
 }
 
 function randomIntFromRange(min, max)

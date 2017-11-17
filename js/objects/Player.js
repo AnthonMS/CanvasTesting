@@ -22,11 +22,11 @@ class Player
     playerRightLeft(keyVal) {
         if (keyVal == 'A') { // A
             this.x += -this.speed;
-            console.log(keyVal);
+            //console.log(keyVal);
             //console.log(platformArray);
         } else if (keyVal == 'D') { // D
             this.x += this.speed;
-            console.log(keyVal);
+            //console.log(keyVal);
         }
     }
 
@@ -34,7 +34,7 @@ class Player
         //console.log("jumptesting");
         if (!this.jumping && this.grounded)
         {
-            console.log("jumptesting");
+            //console.log("jumptesting");
             this.velY = -this.speed * 2;
             this.jumping = true;
             this.grounded = false;
@@ -105,6 +105,13 @@ class Player
             }
         }
         return colDir;
+    }
+
+    playerShootBullet(mouseX, mouseY)
+    {
+        //console.log(mouseX, mouseY);
+        bulletArray.push(new Bullet(this.x + (this.width / 2), this.y, this.canvasWidth, this.canvasHeight, 'white', mouseX, mouseY));
+        //console.log(bulletArray);
     }
 
     randomIntFromRange(min, max)
