@@ -15,10 +15,19 @@ window.onload = function () {
 
     //console.log("Testing Updates!!!!");
 
-    pushPlatform(0, 0, 10, innerHeight);
-    pushPlatform(0, innerHeight - 10, innerWidth, 10);
-    pushPlatform(innerWidth - 10, 0, 10, innerHeight);
-    pushPlatform(0, 0, innerWidth, 10);
+    // walls, roof and ground
+    pushPlatform(0, 0, 5, innerHeight);
+    pushPlatform(0, innerHeight - 5, innerWidth, 5);
+    pushPlatform(innerWidth - 5, 0, 5, innerHeight);
+    pushPlatform(0, 0, innerWidth, 5);
+    // Platforms
+    pushPlatform(200, innerHeight - 100, 100, 15);
+    pushPlatform(innerWidth - 250, innerHeight - 100, 100, 15);
+    pushPlatform((innerWidth / 2)-100, innerHeight - 200, 250, 15);
+    pushPlatform(100, innerHeight/2, 100, 15);
+    pushPlatform(200, innerHeight/2 + 100, 100, 15);
+    pushPlatform(innerWidth - 200, innerHeight/2, 100, 15);
+    pushPlatform(innerWidth - 300, innerHeight/2 + 100, 100, 15);
 
     player = new Player("Player1", 30, 60, innerWidth, innerHeight, 'red');
 
@@ -47,14 +56,14 @@ function animate() {
         ctx.fillStyle = 'skyblue';
         ctx.fillRect(0, 0, innerWidth, innerHeight);
 
+        updatePlayer();
+        updateBullets();
+
         for (var i = 0; i < platformArray.length; i++)
         {
             ctx.fillStyle = 'black';
             ctx.fillRect(platformArray[i].x, platformArray[i].y, platformArray[i].width, platformArray[i].height);
         }
-
-        updatePlayer();
-        updateBullets();
 
     }, 1000/50); // 50 frames per second
 }

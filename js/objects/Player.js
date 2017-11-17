@@ -22,10 +22,12 @@ class Player
     playerRightLeft(keyVal) {
         if (keyVal == 'A') { // A
             this.x += -this.speed;
+            this.grounded = false;
             //console.log(keyVal);
             //console.log(platformArray);
         } else if (keyVal == 'D') { // D
             this.x += this.speed;
+            this.grounded = false;
             //console.log(keyVal);
         }
     }
@@ -61,6 +63,8 @@ class Player
                 this.jumping = false;
             } else if (dir === "t") {
                 this.velY *= -1;
+            } else {
+
             }
         }
 
