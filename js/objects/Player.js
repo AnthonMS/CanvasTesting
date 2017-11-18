@@ -1,6 +1,6 @@
 class Player
 {
-    constructor(name, width, height, canvasWidth, canvasHeight, color)
+    constructor(name, width, height, canvasWidth, canvasHeight, color, playerStill, playerSheet, sheetCols)
     {
         this.name = name;
         this.width = width;
@@ -17,6 +17,11 @@ class Player
         this.grounded = false;
         this.canvasWidth = canvasWidth;
         this.canvasHeight = canvasHeight;
+
+        this.playerStill = playerStill;
+        this.playerSheet = playerSheet;
+        this.sheetCols = sheetCols;
+        this.colDisplay = 1;
     }
 
     playerRightLeft(keyVal) {
@@ -28,6 +33,15 @@ class Player
         } else if (keyVal == 'D') { // D
             this.x += this.speed;
             this.grounded = false;
+            if (this.colDisplay == 1) {
+                this.colDisplay = 2;
+            } else if (this.colDisplay == 2) {
+                this.colDisplay = 3;
+            } else if (this.colDisplay == 3) {
+                this.colDisplay = 4;
+            } else if (this.colDisplay == 4) {
+                this.colDisplay = 2;
+            }
             //console.log(keyVal);
         }
     }
